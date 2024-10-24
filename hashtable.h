@@ -10,7 +10,7 @@
 template <typename T>
 class HashTable {
 public:
-	static const size_t TABLE_SIZE = 1000; // Size of the table
+	static const size_t TABLE_SIZE = 10; // Size of the table
 
 private:
 	class Entry { // An entry in the table
@@ -87,6 +87,23 @@ const T &HashTable<T>::operator[](const std::string &k) const {
 
 	// Return the object in this entry
 	return entries[index].object;
+}
+
+template <typename T>
+bool HashTable<T>::is_key(const std::string &k) const {
+
+	// Determine hash value, then use linear probing if necessary
+	size_t index = hash(k);
+	size_t count = 0;
+	while (entries[index].used && entries[index].key != k && ++count <= TABLE_SIZE)
+		index = (index + 1) % TABLE_SIZE;
+
+	// If not found, throw an exception
+	if (!entries[index].used || entries[index].key != k)
+		return false;
+
+	// Return the object in this entry
+	return true;
 }
 
 template <typename T>
