@@ -1,2 +1,3 @@
-# cpp-debug
-Build/Run/Debug C++ File with Codespaces
+# HashTable
+
+An implementation of a hash table template class using string keys.
