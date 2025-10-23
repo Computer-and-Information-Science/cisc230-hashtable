@@ -98,11 +98,11 @@ bool HashTable<T>::is_key(const std::string &k) const {
 	while (entries[index].used && entries[index].key != k && ++count <= TABLE_SIZE)
 		index = (index + 1) % TABLE_SIZE;
 
-	// If not found, throw an exception
+	// If not found, return false
 	if (!entries[index].used || entries[index].key != k)
 		return false;
 
-	// Return the object in this entry
+	// Return true to indicate key was found
 	return true;
 }
 
